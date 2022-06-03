@@ -15,17 +15,13 @@ if (!$connessione) {
 
 session_start();
 
-for ($i = 1; $i < 12; $i++){
-    $connessione->query("UPDATE items_espositori SET quantita = 1 WHERE id = $i");
-}
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/index-style.css">
+    <link rel="stylesheet" href="css/account-style.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -38,14 +34,14 @@ for ($i = 1; $i < 12; $i++){
     </div>
     <ul class="nav-list">
         <li>
-            <a href="#" style="background-color: #383838">
+            <a href="index.php">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Home</span>
             </a>
             <span class="tooltip">Home</span>
         </li>
         <li>
-            <a href="account.php">
+            <a href="#" style="background-color: #383838">
                 <i class='bx bx-user' ></i>
                 <span class="links_name">Account</span>
             </a>
@@ -92,39 +88,30 @@ for ($i = 1; $i < 12; $i++){
 <section class="home-section">
 
     <div class="containerr">
-        <a href="account.php" class="profilo">
+        <a href="#" class="profilo">
             <?php echo'<span class="user">'.$_SESSION['username'].'</span>'?>
             <img src="imgs/profilo.svg" class="img">
         </a>
     </div>
 
-    <div class="catalogo">
+    <center>
+    <div class="contenitore">
+        <center>
+            <div class="account-cont">
+                <img src="imgs/profilo.svg" class="immagineaccount">
+                <div class="informazioni">
 
-        <?php
-        $tab = $connessione->query("SELECT items.id, items.nome, tipologie.nome, items_espositori.quantita, items.prezzo, items.img_link FROM items INNER JOIN items_espositori ON items.id = items_espositori.item INNER JOIN tipologie ON items.tipologia = tipologie.id WHERE items_espositori.quantita > 0");
-        $all = $tab->fetch_all();
-        for ($i = 0; $i<$tab->num_rows; $i++){
-            $current = $all[$i];
-            ?>
-            <div class="card">
-                <div class="info">
-                    <center><img class="img-item" src="<?php echo $current[5] ?>"></center>
-                    <p class="item"><?php echo $current[1] ?></p>
-                    <p class="tipo-item"><?php echo $current[2] ?></p>
-                    <p class="quantità"> Disponibili: &nbsp; <?php echo $current[3] ?></p>
                 </div>
-                <div class="add">
-                    <span class="prezzo"> <?php echo $current[4] ?>€ </span>
-                    <button type="button" class="aggiungi"><i class="bx bxs-cart-add"></i></button>
-                </div>
+                <a href=""></a>
+                <button type="button" class="modifica" href="index.php"><i class="bx bxs-cart-add"></i> Modifica profilo</button>
             </div>
-        <?php } ?>
-
+        </center>
     </div>
+    </center>
 
     <div class="footer">
         <center><img class="logo-footer" src="imgs/logo-lindt.png"><br>
-        <span class="copyright">Copyright © 2022 - MTF Industries</span></center>
+            <span class="copyright">Copyright © 2022 - MTF Industries</span></center>
     </div>
 
 </section>
